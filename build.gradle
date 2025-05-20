@@ -55,6 +55,10 @@ dependencies {
 	//mail
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
 
+	//docker
+	developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
+
+
 
 }
 
