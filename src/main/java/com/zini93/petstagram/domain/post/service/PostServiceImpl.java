@@ -38,7 +38,7 @@ public class PostServiceImpl implements PostService{
                 .build();
     }
 
-    @Override
+    @Override @Transactional
     public PostResponseDto createPostWithValidate(String userUuid, PostRequestDto requestDto) {
 
         User user = userRepository.findByUserUuid(userUuid)
@@ -69,14 +69,14 @@ public class PostServiceImpl implements PostService{
         return post;
     }
 
-    @Override
+    @Override @Transactional
     public PostResponseDto updatePostWithValidate(String userUuid, String postUuid, PostUpdateDto updateDto) {
 
         Post post = updatePost(userUuid, postUuid, updateDto);
         return post.toResponse();
     }
 
-    @Override
+    @Override @Transactional
     public void deletePost(String userUuid, String postUuid) {
 
         Post post = findPostByUserUuidAndPostUuidInPostUuid(userUuid, postUuid);

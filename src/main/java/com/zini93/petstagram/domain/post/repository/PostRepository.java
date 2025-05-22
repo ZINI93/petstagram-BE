@@ -9,4 +9,6 @@ import java.util.Optional;
 public interface PostRepository extends JpaRepository<Post, Long> {
 
     Optional<Post> findByUserUserUuidAndPostUuid(String userUuid, String postUuid);
+    Optional<Post> findByPostUuid(String postUuid);
+
 }

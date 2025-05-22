@@ -14,6 +14,7 @@ import java.util.UUID;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Table(name = "posts")
 @Entity
 public class Post extends BaseEntity {
 
@@ -23,7 +24,7 @@ public class Post extends BaseEntity {
     private Long postId;
 
     @Column(name = "post_uuid", nullable = false, updatable = false, unique = true)
-    private String postUuid;
+    private String postUuid = UUID.randomUUID().toString();
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false, updatable = false)
@@ -37,7 +38,7 @@ public class Post extends BaseEntity {
 
     @Builder
     public Post(String postUuid, User user, String postImageUrl, String content) {
-        this.postUuid = UUID.randomUUID().toString();
+        this.postUuid = postUuid;
         this.user = user;
         this.postImageUrl = postImageUrl;
         this.content = content;
