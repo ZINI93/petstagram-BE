@@ -1,9 +1,7 @@
 package com.zini93.petstagram.domain.comment.entity;
 
 import com.zini93.petstagram.domain.BaseEntity;
-import com.zini93.petstagram.domain.comment.dto.CommentRequestDto;
 import com.zini93.petstagram.domain.comment.dto.CommentResponseDto;
-import com.zini93.petstagram.domain.comment.dto.CommentUpdateDto;
 import com.zini93.petstagram.domain.post.entity.Post;
 import com.zini93.petstagram.domain.user.entity.User;
 import jakarta.persistence.*;
@@ -50,9 +48,14 @@ public class Comment extends BaseEntity {
     public CommentResponseDto toResponse(){
         return CommentResponseDto.builder()
                 .commentUuid(this.commentUuid)
-                .post(this.post)
-                .user(this.user)
+                .postUuid(this.post.getPostUuid())
+                .userUuid(this.user.getUserUuid())
                 .content(this.content)
                 .build();
+    }
+
+
+    public void updateComment(String content) {
+        this.content = content;
     }
 }

@@ -12,15 +12,15 @@ import java.util.UUID;
 public class CommentResponseDto {
 
     private String commentUuid;
-    private Post post;
-    private User user;
+    private String postUuid;
+    private String userUuid;
     private String content;
 
     @Builder
-    public CommentResponseDto(String commentUuid, Post post, User user, String content) {
+    public CommentResponseDto(String commentUuid, String postUuid, String userUuid, String content) {
         this.commentUuid = commentUuid;
-        this.post = post;
-        this.user = user;
+        this.postUuid = postUuid;
+        this.userUuid = userUuid;
         this.content = content;
     }
 }

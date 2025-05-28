@@ -49,8 +49,8 @@ public class CommentServiceImpl implements CommentService{
         return savedComment.toResponse();
     }
 
-    private void updateComment(CommentUpdateDto updateDto){
-        new CommentUpdateDto(updateDto.getContent());
+    private void updateComment(Comment comment, CommentUpdateDto updateDto){
+        comment.updateComment(updateDto.getContent());
     }
 
     @Override @Transactional
@@ -59,7 +59,7 @@ public class CommentServiceImpl implements CommentService{
         Post post = findPostByPostUuidInPost(postUuid);
         Comment comment = findCommentByUserUuidAndCommentUuidInComment(userUuid, commentUuid);
         validateCommentAndPostMatch(post, comment);
-        updateComment(updateDto);
+        updateComment(comment,updateDto);
 
         return comment.toResponse();
     }

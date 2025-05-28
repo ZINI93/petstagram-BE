@@ -47,6 +47,7 @@ class LikeServiceImplTest {
         //given
         when(userRepository.findByUserUuid(user.getUserUuid())).thenReturn(Optional.ofNullable(user));
         when(postRepository.findByPostUuid(post.getPostUuid())).thenReturn(Optional.ofNullable(post));
+        when(likeRepository.save(any(Like.class))).thenReturn(like);
 
         //when
         LikeResponseDto result = likeService.createLikeWithValidate(user.getUserUuid(), post.getPostUuid());
@@ -55,11 +56,22 @@ class LikeServiceImplTest {
 
         verify(userRepository,times(1)).findByUserUuid(user.getUserUuid());
         verify(postRepository,times(1)).findByPostUuid(post.getPostUuid());
+        verify(likeRepository,times(1)).save(any(Like.class));
 
     }
 
     @Test
     void deleteLike() {
+        //given
+        when(likeRepository.findByUserUserUuidAndLikeUuid(user.getUserUuid(), like.getLikeUuid())).thenReturn(Optional.ofNullable(like));
+
+
+        //when
+        likeService.deleteLike(user.getUserUuid(), like.getLikeUuid());
+
+
+        //then
+
     }
 
     @Test
