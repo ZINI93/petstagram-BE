@@ -2,6 +2,7 @@ package com.zini93.petstagram.domain.comment.service;
 
 import com.zini93.petstagram.domain.comment.dto.CommentRequestDto;
 import com.zini93.petstagram.domain.comment.dto.CommentResponseDto;
+import com.zini93.petstagram.domain.comment.dto.CommentUpdateDto;
 import com.zini93.petstagram.domain.comment.entity.Comment;
 import com.zini93.petstagram.domain.comment.repository.CommentRepository;
 import com.zini93.petstagram.domain.post.entity.Post;
@@ -70,9 +71,34 @@ class CommentServiceImplTest {
 
     @Test
     void updateCommentWithValidate() {
+
+        //given
+        CommentUpdateDto updateComment = new CommentUpdateDto("kawai dog");
+        when(postRepository.findByPostUuid(comment.getPost().getPostUuid())).thenReturn(Optional.ofNullable(post));
+        when(commentRepository.findByUserUserUuidAndCommentUuid(user.getUserUuid(), comment.getCommentUuid())).thenReturn(Optional.ofNullable(comment));
+
+        //when
+        CommentResponseDto result = commentService.updateCommentWithValidate(user.getUserUuid(), comment.getCommentUuid(), comment.getPost().getPostUuid(), updateComment);
+
+        //then
+        assertNotNull(result);
+        assertEquals(updateComment.getContent(), result.getContent());
+
+        verify(commentRepository, times(1)).findByUserUserUuidAndCommentUuid(user.getUserUuid(), comment.getCommentUuid());
+
     }
 
     @Test
     void deleteComment() {
+        //given
+        when(postRepository.findByPostUuid(comment.getPost().getPostUuid())).thenReturn(Optional.ofNullable(post));
+        when(commentRepository.findByUserUserUuidAndCommentUuid(user.getUserUuid(), comment.getCommentUuid())).thenReturn(Optional.ofNullable(comment));
+
+        //when
+        commentService.deleteComment(user.getUserUuid(), comment.getCommentUuid(), comment.getPost().getPostUuid());
+
+        //
+
+
     }
 }
