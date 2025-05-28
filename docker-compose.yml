@@ -8,9 +8,9 @@ services:
     ports:
       - "3307:3306"
     environment:
-      - MYSQL_DATABASE=petstagram
-      - MYSQL_USER=petstagram_local_user
-      - MYSQL_PASSWORD=251010
-      - MYSQL_ROOT_PASSWORD=reservation0320
+      - MYSQL_DATABASE=
+      - MYSQL_USER=
+      - MYSQL_PASSWORD=
+      - MYSQL_ROOT_PASSWORD=
       - TZ=Asia/Seoul
 
